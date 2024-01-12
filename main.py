@@ -1,11 +1,9 @@
 import random 
-
+import art
+import os
 cards = [11,2,3,4,5,6,7,8,9,10,10,10,10]
 dealer_hand = []
 player_hand = []
-
-gameIsActive = True
-iteration = 1
 
 def show_dealer_cards(count):
     dealer_hand_minus_one = []
@@ -39,7 +37,11 @@ def sum_checker():
         print(f"Your New Hand {player_hand} total: {sum(player_hand)}\n\n\n")  
 
 def player_stats():
-    if sum(player_hand) == 21:
+    if sum(dealer_hand) >21:
+        print("You Win, Dealer has more than 21")
+        show_cards(player_hand, "Your")
+        show_cards(dealer_hand, "Dealer")
+    elif sum(player_hand) == 21:
         print("You Win")
         show_cards(player_hand, "Your")
         show_cards(dealer_hand, "Dealer")
@@ -70,26 +72,39 @@ def check_winner():
         show_cards(player_hand, "Your")
         show_cards(dealer_hand, "Dealer")
 
-first_hand(player_hand)
-first_hand(dealer_hand)
+def main():
+    print(art.logo)
+    gameIsActive = True
+    iteration = 1
+    first_hand(player_hand)
+    first_hand(dealer_hand)
 
-while gameIsActive:
+    while gameIsActive:
     
-    show_cards(player_hand, "Your")
-    show_dealer_cards(iteration)
-    # print(f"Full Dealer Hand {dealer_hand} total: {sum(dealer_hand)}")
-    state = input("again? ")
-    if state == "y":
-        iteration +=1
-        another_draw(player_hand) 
-        another_draw(dealer_hand) 
-        sum_checker()
-        gameIsActive = player_stats()
+        show_cards(player_hand, "Your")
+        show_dealer_cards(iteration)
+        # print(f"Full Dealer Hand {dealer_hand} total: {sum(dealer_hand)}")
+        state = input("\nDraw again? ")
+        if state == "y":
+            iteration +=1
+            another_draw(player_hand) 
+            another_draw(dealer_hand) 
+            sum_checker()
+            gameIsActive = player_stats()
+        else:
+            #break 
+            gameIsActive = False
+            check_winner()
+
+
+while True:
+    main()
+    start_agan = input("\n\n\nCare to Play Again? ")
+    if start_agan == "y":
+        os.system('cls')
+        dealer_hand.clear()
+        player_hand.clear()
+        main()
     else:
-        #break 
-        gameIsActive = False
-        check_winner()
-
-
-
-        
+        print(art.bye)
+        break
