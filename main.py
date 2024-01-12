@@ -1,9 +1,21 @@
 import random 
 
-cards = [11,11,11,11,11,2,3,4,5,6,7,8,9,10,10,10,10]
+cards = [11,2,3,4,5,6,7,8,9,10,10,10,10]
 dealer_hand = []
 player_hand = []
 
+gameIsActive = True
+iteration = 1
+
+def show_dealer_cards(count):
+    dealer_hand_minus_one = []
+    for i in range(count):
+        dealer_hand_minus_one.append(dealer_hand[i])
+
+    print(f"not Full Dealer Hand {dealer_hand_minus_one} total: {sum(dealer_hand_minus_one)} + X")
+
+def show_cards(player, name):
+    print(f"{name} Hand {player} total: {sum(player)}")
 
 def deal_card():
     return random.choice(cards)
@@ -24,32 +36,60 @@ def sum_checker():
         for i in range(len(player_hand)):
             if player_hand[i] == 11:
                 player_hand[i] = 1
-        print(f"Your New Hand {player_hand} total: {sum(player_hand)}")  
+        print(f"Your New Hand {player_hand} total: {sum(player_hand)}\n\n\n")  
 
 def player_stats():
     if sum(player_hand) == 21:
         print("You Win")
-        print(f"Your Hand {player_hand} total: {sum(player_hand)}")
+        show_cards(player_hand, "Your")
+        show_cards(dealer_hand, "Dealer")
         return False
     elif sum(player_hand) > 21:
         print("You Lose")
-        print(f"Your Hand {player_hand} total: {sum(player_hand)}")
+        show_cards(player_hand, "Your")
         return False
     else:
         return True
 
+def check_winner():
+    if sum(dealer_hand) <= 21:
+        if sum(player_hand) > sum(dealer_hand):
+            print("You Win")
+            show_cards(player_hand, "Your")
+            show_cards(dealer_hand, "Dealer")
+        elif sum(player_hand) == sum(dealer_hand):
+            print("Draw")
+            show_cards(player_hand, "Your")
+            show_cards(dealer_hand, "Dealer")
+        else:
+            print("You Lose")
+            show_cards(player_hand,"Your")
+            show_cards(dealer_hand,"Dealer")
+    else:
+        print("You Win, Dealer has more than 21")
+        show_cards(player_hand, "Your")
+        show_cards(dealer_hand, "Dealer")
+
 first_hand(player_hand)
 first_hand(dealer_hand)
 
-gameIsActive = True
-
 while gameIsActive:
-    print(f"Your Hand {player_hand} total: {sum(player_hand)}")
-    print(f"Dealer Hand {dealer_hand} total: {sum(dealer_hand)}")
+    
+    show_cards(player_hand, "Your")
+    show_dealer_cards(iteration)
+    # print(f"Full Dealer Hand {dealer_hand} total: {sum(dealer_hand)}")
     state = input("again? ")
     if state == "y":
+        iteration +=1
         another_draw(player_hand) 
+        another_draw(dealer_hand) 
         sum_checker()
         gameIsActive = player_stats()
     else:
-        break #Compare hands
+        #break 
+        gameIsActive = False
+        check_winner()
+
+
+
+        
