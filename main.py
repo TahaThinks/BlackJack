@@ -46,5 +46,7 @@ while gameIsActive:
     state = input("again? ")
     if state == "y":
         another_draw() #here
+        sum_checker()
+        player_stats()  
     else:
         break #Compare hands
