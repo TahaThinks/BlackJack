@@ -8,11 +8,21 @@ def deal_card():
     return random.choice(cards)
 
 
-for i in range(2):
-    card = deal_card()
-    player_hand.append(card)
+def first_hand(player):
+    for i in range(2):
+        card = deal_card()
+        player.append(card)
 
-for i in range(2):
-    card = deal_card()
-    dealer_hand.append(card)
+first_hand(player_hand)
+first_hand(dealer_hand)
 
+
+while True:
+    print(f"Your Hand {player_hand} total: {sum(player_hand)}")
+    print(f"Dealer Hand {dealer_hand} total: {sum(dealer_hand)}")
+    state = input("again? ")
+    if state == "y":
+        card = deal_card()
+        player_hand.append(card)
+    else:
+        break
