@@ -5,7 +5,14 @@ dealer_hand = []
 player_hand = []
 
 def deal_card():
-    card = random.choice(cards)
-    print(card)
+    return random.choice(cards)
 
-deal_card()
+
+for i in range(2):
+    card = deal_card()
+    player_hand.append(card)
+
+for i in range(2):
+    card = deal_card()
+    dealer_hand.append(card)
+
