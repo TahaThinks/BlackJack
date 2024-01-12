@@ -15,14 +15,19 @@ def first_hand(player):
 first_hand(player_hand)
 first_hand(dealer_hand)
 
+player_hand_sum = 0
 
-while True:
+while player_hand_sum < 21:
     print(f"Your Hand {player_hand} total: {sum(player_hand)}")
     print(f"Dealer Hand {dealer_hand} total: {sum(dealer_hand)}")
     
+    player_hand_sum += sum(player_hand)
+
     state = input("again? ")
     if state == "y":
         card = deal_card()
         player_hand.append(card)
     else:
         break
+
+print(f"You Lose {player_hand} total: {sum(player_hand)}")
