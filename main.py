@@ -99,8 +99,8 @@ def main():
 
 while True:
     main()
-    start_agan = input("\n\n\nCare to Play Again? ")
-    if start_agan == "y":
+    start_again = input("\n\n\nCare to Play Again? ")
+    if start_again == "y":
         os.system('cls')
         dealer_hand.clear()
         player_hand.clear()
