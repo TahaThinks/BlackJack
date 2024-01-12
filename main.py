@@ -26,6 +26,16 @@ def sum_checker():
                 player_hand[i] = 1
     print(f"Your New Hand {player_hand} total: {sum(player_hand)}")  
 
+def player_stats():
+    if sum(player_hand) == 21:
+        gameIsActive = False
+        print("You Win")
+        print(f"Your Hand {player_hand} total: {sum(player_hand)}")
+    if sum(player_hand) > 21:
+        gameIsActive = False
+        print("You Lose")
+        print(f"Your Hand {player_hand} total: {sum(player_hand)}")
+
 first_hand(player_hand)
 first_hand(dealer_hand)
 
