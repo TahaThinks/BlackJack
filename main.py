@@ -41,14 +41,20 @@ def player_stats():
         print("You Win, Dealer has more than 21")
         show_cards(player_hand, "Your")
         show_cards(dealer_hand, "Dealer")
+        dealer_hand.clear()
+        player_hand.clear()
     elif sum(player_hand) == 21:
         print("You Win")
         show_cards(player_hand, "Your")
         show_cards(dealer_hand, "Dealer")
+        dealer_hand.clear()
+        player_hand.clear()
         return False
     elif sum(player_hand) > 21:
         print("You Lose")
         show_cards(player_hand, "Your")
+        dealer_hand.clear()
+        player_hand.clear()
         return False
     else:
         return True
@@ -102,8 +108,6 @@ while True:
     start_again = input("\n\n\nCare to Play Again? ")
     if start_again == "y":
         os.system('cls')
-        dealer_hand.clear()
-        player_hand.clear()
         main()
     else:
         print(art.bye)
